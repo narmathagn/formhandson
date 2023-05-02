@@ -1,0 +1,20 @@
+input.ng-touched.ng-invalid{
+    border-color: red;
+}
+.clr{
+    color: red;
+}
+select.ng-touched.ng-invalid{
+    border-color: red;
+}
+.clrbor{
+    border: 1px solid;
+    border-color: red;
+}
+textarea.ng-touched.ng-invalid{
+    border-color: red;
+}
+.clrbor{
+    border: 1px solid;
+    border-color: black;
+}

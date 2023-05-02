@@ -1,0 +1,99 @@
+<div class="container">
+<form [formGroup]="forms">
+    <h1><b>Form Validation</b></h1>
+    <div class="form-group">
+    <input type="text" class="form-control" placeholder="Associate Name" formControlName="assname">
+    <div *ngIf="assname.touched && assname.errors && assname.errors.required" class="clr">
+        Please Enter Associate Name
+    </div>
+    <div *ngIf="assname.touched && assname.errors && assname.errors.minlength" class="clr">
+        Associate Name Should Have Atleast 5 Characters
+     </div>
+     <div *ngIf="assname.touched && assname.errors && assname.errors.maxlength" class="clr">
+        Maximum Allowed Characters Is Only 30
+     </div>
+     <div *ngIf="assname.touched && assname.errors && assname.errors.pattern" class="clr">
+        Special Characters Are Not Allowed
+     </div>
+    </div>
+    <div class="form-group">
+    <input type="text" class="form-control" placeholder="Associate ID"  formControlName="assid">
+    <div *ngIf="assid.touched && assid.errors && assid.errors.required" class="clr">
+        Please Enter Associate ID
+    </div>
+    <div *ngIf="assid.touched && assid.errors && assid.errors.minlength" class="clr">
+        Invalid Associate ID
+     </div>
+     <div *ngIf="assid.touched && assid.errors && assid.errors.pattern" class="clr">
+        Invalid Associate ID
+     </div>
+    </div>
+    <div class="form-group">
+    <input type="text" class="form-control" placeholder="Project ID" formControlName="prjctid">
+    <div *ngIf="prjctid.touched && prjctid.errors && prjctid.errors.required" class="clr">
+        Please Enter Project Id
+    </div>
+    <div *ngIf="prjctid.touched && prjctid.errors && prjctid.errors.minlength" class="clr">
+        Invalid Project ID
+     </div>
+     <div *ngIf="prjctid.touched && prjctid.errors && prjctid.errors.maxlength" class="clr">
+        Invalid Project ID
+     </div>
+     <div *ngIf="prjctid.touched && prjctid.errors && prjctid.errors.pattern" class="clr">
+        Invalid Project ID
+     </div>
+    </div>
+    <div class="form-group">
+    <label class="radio-inline"><input type="radio" name="locat" value="offshore" formControlName="locat">Offshore</label>
+    <label class="radio-inline"><input type="radio"  name="locat" value="onshore" formControlName="locat">Onshore</label>
+    <div *ngIf="locat.touched && locat.errors && locat.errors.required" class="clr">
+        Please Select The Location
+    </div>   
+</div>
+    <div class="form-group" *ngIf="locat.value=='offshore'">
+        <select class="form-select form-control" formControlName="locatsel">
+            <option value="" disabled selected>Select Location</option>
+            <option>Chennai</option>
+            <option>Bangalore</option>
+            <option>Hyderabad</option>
+            <option>Pune</option>
+            <option>Kochi</option>
+        </select> 
+    <div *ngIf="locatsel.touched && locatsel.errors && locatsel.errors.required" class="clr">
+        Please Select The Location
+    </div>
+    </div>
+    <div class="form-group" *ngIf="locat.value=='onshore'">
+        <select class="form-select form-control" formControlName="locatsel">
+            <option value="" disabled selected>Select Location</option>
+            <option>US</option>
+            <option>Non US</option>
+        </select>   
+    <div *ngIf="locatsel.touched && locatsel.errors && locatsel.errors.required" class="clr">
+        Please Select The Location
+    </div>
+    </div>
+    <div class="row">
+    <div *ngFor="let course of courses.controls;let i=index" formArrayName="courses" class="col-sm-4">
+        <input [checked]=0 type="checkbox" [formControlName]="i" [value]="allcourses[i].title">
+        {{allcourses[i].title}}
+      </div>
+      </div>
+      <p *ngIf="courses.touched && courses.errors" class="clr">Please Select Minimum 5 Skills</p><br>
+      <div class="custom-file">
+        <label>Upload Profile</label>
+        <input type="file" formControlName="profile" [class]="profile.touched && profile.errors && profile.errors.required?'clrbor':'clrbla'">
+        <div *ngIf="profile.touched && profile.errors && profile.errors.required" class="clr">
+            Please Upload Profile Picture
+        </div><br>
+      </div>
+      <div class="form-group">
+        <textarea class="form-control" rows="3" id="comment" placeholder="Comments" formControlName="comment"></textarea>
+        <div *ngIf="comment.touched && comment.errors && comment.errors.required" class="clr">
+            Please Enter Comments
+        </div><br>
+    </div>
+    <button type="submit" [disabled]="!forms.valid" class="btn btn-primary">Submit</button>&nbsp;
+    <button class="btn btn-danger" (click)="resetForm()">Reset</button>
+</form>
+</div>
